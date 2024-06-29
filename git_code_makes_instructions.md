@@ -26,4 +26,4 @@ user.name=Your Name
 user.email=youreamil@yourdomain.com
 ```
 
-### 1.2 Initialize the repositorys
+### 1.2 Initialize the repository
