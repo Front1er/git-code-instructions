@@ -27,3 +27,7 @@ user.email=youreamil@yourdomain.com
 ```
 
 ### 1.2 Initialize the repository
+
+1
+22
+333
