@@ -28,3 +28,4 @@ user.email=youreamil@yourdomain.com
 
 ### 1.2 Initialize the repository
 
+test
