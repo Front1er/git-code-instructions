@@ -1,6 +1,6 @@
 # git code makes instructions
 
-useful instructions links
+## useful instructions links
 
 [基于 VScode 的 git 详细使用指南【保姆级！建议收藏！】_vscode git-CSDN博客](https://blog.csdn.net/weixin_48024605/article/details/136037857)
 
@@ -9,6 +9,13 @@ useful instructions links
 [血泪教训之请不要再轻视Git —— 我在工作中是如何使用 Git 的 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/250493093)
 
 [似懂非懂的Git —— 你也只会三招吗？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/107686455)
+
+[最全的git命令（详细）和对常见git操作流程讲解 - 个人文章 - SegmentFault 思否](https://segmentfault.com/a/1190000042347483)
+
+
+
+[TOC]
+
 
 
 ## 1 git native code versioning
@@ -48,35 +55,95 @@ git config --global alias.logl 'log --oneline'
 
 ### manipulate
 
-View the status of the current project:  `git st`
+View the status of the current project:  
+
+```cmd
+git st
+```
 
 #### 初始化 Git
 
-cd 命令导航到要在终端中设置版本控制的目录，初始化 Git：`git init`
+cd 命令导航到要在终端中设置版本控制的目录，初始化 Git：
+
+````cmd
+cd "path"
+mkdir "repo name"
+# show path
+pwd
+git init # add a .git document
+````
 
 #### 添加并提交
 
 ```cmd
 git add <file>
-git commit -m 'first commit'
+git commit -m 'first commit' # ""=''
+# check what info had been modified in <file name>
+git diff <file name>
+
+# remove the file
+rm "file name"
 ```
 
-#### 远程备份
+#### check contexts of the file
 
 ```cmd
-# 示例
+cat "filename"
+```
+
+#### 远程备份==关联==
+
+```cmd
+# Sign up for a GitHub account
+# Create an SSH key, add two files:id_rsa & id_rsa.pub
+ssh-keygen -t rsa –C "youremail@example.com"
+
+# First, log in to GitHub and create a new repository by finding "Create a New Repo" in the top right corner, then "Create repository"
+
+# Second, on local repository 示例
 git remote add origin \
 https://github.com/wupeixuan/repo.git 
+git remote add "name" "git-repo-url"
+
 # 以我的一个仓库为例
 git remote add origin \
 https://github.com/wupeixuan/JDKSourceCode1.8.git
+git remote add origin https://github.com/tugenhua0707/testgit.git
+
+# which repositories or addresses were associated with
+git remote
+git remote -v # detail
 ```
 
 #### 代码推送
 
 ```cmd
+# first push branch, -u is used to associate
+git push -u origin master
+# a few times later
 git push origin master
+git push origin dev # other brach
 ```
+
+#### 代码克隆
+
+```cmd
+# clone the remote repo, and it will be named as origin
+git clone "git-repo-url"
+# Synchronize the dev branch of the remote origin to the local computer
+git checkout -b dev origin/dev
+```
+
+### resolve conflict branch
+
+```cmd
+git pull
+git pull "remote" "brach"
+# or Links to Dev and Origin/Dev
+git brach --set-upstream-to=origin/dev dev
+```
+
+
 
 #### 高级文件添加
 
@@ -126,8 +193,11 @@ git rebase -i
 #### 分支
 
 ```cmd
-### 创建一个本地分支
+### 创建一个本地分支并切换
 git checkout -b branchname
+# the same as below
+git branch "branchname" 
+git checkout "branchname"
 
 ### 在2个分支之间切换
 git checkout prc/dev-wupx
@@ -171,8 +241,11 @@ $ git push origin branchname
 ### 首先确保你正在查看 master 分支
 git checkout master
 
-### 现在将你的分支合并到 master 
+### 现在将你的分支合并到 master, in "Fast forward" mode 
 git merge prc/dev-wupx
+
+# soft mode
+git merge --no-ff -m "message" "brachname"
 ```
 
 ### 修复错误和回溯
@@ -193,7 +266,11 @@ git reset HEAD~5 -- filename # for a specific file
 git reset 0766c053 -- filename
 git reset 0766c053 -- filename # for a specific file
 ### 先前的命令是所谓的软重置。 你的代码已重置，但是git仍会保留其他代码的副本，以备你需要时使用。 另一方面，--hard 标志告诉Git覆盖工作目录中的所有更改。
+git reflog # view version number
 git reset --hard 0766c053
+
+# remove the modify of the file
+git checkout -- file name
 ```
 
 ### 搜索
@@ -242,6 +319,7 @@ git log --author 'wupx'
 
 ### 显示存储库中提交列表的摘要。显示提交ID和提交消息的较短版本。
 git log --oneline
+git log -pretty=oneline
 
 ### 显示昨天以来仓库中的提交列表
 git log --since=yesterday
@@ -249,6 +327,23 @@ git log --since=yesterday
 ### 显示作者日志，并在提交消息中搜索特定术语
 git log --grep "project" --author "wupx"
 ```
+
+### stash
+
+```cmd
+# Temporarily remove uncommitted changes and move them back in later
+git stash
+# Update the branch
+git pull
+# check stash stage
+git stash list
+# Stage modifications are restored to the workspace
+git stash pop # this cmd apply restore and delete
+git stash apply # restore but no delete
+git stash drop # delete one stage
+```
+
+### photo
 
 ![img](https://pic2.zhimg.com/v2-31a3f3d822e9c7cd2264054b0808ab61_r.jpg)
 
