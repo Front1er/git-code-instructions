@@ -12,6 +12,10 @@
 
 [最全的git命令（详细）和对常见git操作流程讲解 - 个人文章 - SegmentFault 思否](https://segmentfault.com/a/1190000042347483)
 
+[refusing to merge unrelated histories的解决方案（本地/远程）综合-CSDN博客](https://blog.csdn.net/junruitian/article/details/88361895)
+
+[记Git报错-refusing to merge unrelated histories-CSDN博客](https://blog.csdn.net/u012145252/article/details/80628451)
+
 
 
 [TOC]
@@ -122,7 +126,7 @@ git remote -v # detail
 git push -u origin master
 # a few times later
 git push origin master
-git push origin dev # other brach
+git push origin dev # other branch
 ```
 
 #### 代码克隆
@@ -138,7 +142,7 @@ git checkout -b dev origin/dev
 
 ```cmd
 git pull
-git pull "remote" "brach"
+git pull "remote" "branch"
 # or Links to Dev and Origin/Dev
 git branch --set-upstream-to=origin/dev dev
 ```
@@ -245,7 +249,7 @@ git checkout master
 git merge prc/dev-wupx
 
 # soft mode
-git merge --no-ff -m "message" "brachname"
+git merge --no-ff -m "message" "branchname"
 ```
 
 ### 修复错误和回溯
@@ -342,6 +346,19 @@ git stash pop # this cmd apply restore and delete
 git stash apply # restore but no delete
 git stash drop # delete one stage
 ```
+
+#### refusing to merge unrelated histories
+
+```cmd
+git merge origin/old-file --allow-unrelated-histories
+git pull origin master --allow-unrelated-histories
+git push origin master:master
+# git pull can be seemed combined as git fetch and git merge
+git fetch [remote-name]
+git fetch origin
+```
+
+
 
 ### photo
 
