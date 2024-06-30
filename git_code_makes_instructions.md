@@ -140,7 +140,7 @@ git checkout -b dev origin/dev
 git pull
 git pull "remote" "brach"
 # or Links to Dev and Origin/Dev
-git brach --set-upstream-to=origin/dev dev
+git branch --set-upstream-to=origin/dev dev
 ```
 
 
